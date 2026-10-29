@@ -4142,6 +4142,13 @@
         line-height: 1.75;
       }
 
+      .messages-thread--server .thread-bubble--qc001-signal {
+        direction: ltr;
+        text-align: left;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
       .messages-thread--server .thread-bubble--sent {
         align-self: flex-end;
         background: #d3f2e7;
@@ -7085,6 +7092,21 @@
       const serverEmojiGrid = document.getElementById("server-emoji-grid");
       const SERVER_ADMIN_FIXED_REPLY =
         "مرحباً، خدمة BonChat متاحة على مدار الساعة. إذا واجهت أي مشاكل تشغيلية، فلا تتردد في الاتصال بنا للحصول على المساعدة. شكراً لك.";
+      const QC001_SIGNAL_MESSAGE = [
+        "─── 🚀 Exklusive Handelssignale (Live) ───",
+        "",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `9H3fL6kJ`",
+        "⏰ **Schließungszeit:** 6:00",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "",
+        "─────────────────────────────",
+        "VeloXCore TRADING",
+        "9H3fL6kJ",
+      ].join("\n");
       const SERVER_ADMIN_REPLY_DELAY_MS = 60_000;
       let serverAdminReplyScheduled = false;
       let serverAdminReplyShown = false;
@@ -8870,11 +8892,12 @@
         updateMessagesList();
       }
 
-      function addThreadBubble(text, sent, timeLabel = "") {
+      function addThreadBubble(text, sent, timeLabel = "", extraClass = "") {
         const bubble = document.createElement("div");
         bubble.className = sent
           ? "thread-bubble thread-bubble--sent"
           : "thread-bubble";
+        if (extraClass) bubble.classList.add(extraClass);
         bubble.textContent = text;
         if (messagesThread.classList.contains("messages-thread--server")) {
           const time = document.createElement("time");
@@ -8918,6 +8941,17 @@
             : "ابدأ محادثة جديدة";
         threadLog.appendChild(dayLabel);
         if (isServerAdmin) {
+          if (
+            row.id === "server-admin-conversation" &&
+            row.dataset.name === "خادم: qc001"
+          ) {
+            addThreadBubble(
+              QC001_SIGNAL_MESSAGE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+          }
           serverAdminMessageHistory.forEach((message) => {
             addThreadBubble(message.text, true, message.time);
           });
