@@ -170,22 +170,24 @@
         left: 50%;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
+        direction: ltr;
+        flex-direction: row;
         transform: translate(-50%, -50%);
         white-space: nowrap;
       }
 
       .app-splash-logo {
         display: block;
-        width: clamp(62px, 18vw, 84px);
-        height: clamp(62px, 18vw, 84px);
+        width: clamp(84px, 24vw, 112px);
+        height: clamp(84px, 24vw, 112px);
         object-fit: contain;
       }
 
       .app-splash-word {
         color: #07957a;
         font-family: Arial, sans-serif;
-        font-size: clamp(34px, 9vw, 48px);
+        font-size: clamp(42px, 11vw, 58px);
         font-style: italic;
         font-weight: 700;
         letter-spacing: -1.8px;
