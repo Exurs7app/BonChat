@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="description" content="انضم إلى خادم BonChat الموجود في الموقع." />
     <title>BonChat — انضم إلى خادم</title>
-    <meta name="theme-color" content="#07957a" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="application-name" content="BonChat" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="./bonchat-icon-192.png" />
@@ -164,49 +164,39 @@
         pointer-events: none;
       }
 
-      .app-splash-brand {
+      .app-splash-artboard {
         position: absolute;
-        top: 39%;
+        top: 50%;
         left: 50%;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        direction: ltr;
-        flex-direction: row;
+        width: min(100vw, 48.9vh);
+        width: min(100vw, 48.9dvh);
+        aspect-ratio: 626 / 1280;
         transform: translate(-50%, -50%);
-        white-space: nowrap;
       }
 
-      .app-splash-logo {
+      .app-splash-artwork {
+        position: absolute;
+        inset: 0;
         display: block;
-        width: clamp(84px, 24vw, 112px);
-        height: clamp(84px, 24vw, 112px);
+        width: 100%;
+        height: 100%;
         object-fit: contain;
-      }
-
-      .app-splash-word {
-        color: #07957a;
-        font-family: Arial, sans-serif;
-        font-size: clamp(42px, 11vw, 58px);
-        font-style: italic;
-        font-weight: 700;
-        letter-spacing: -1.8px;
-        line-height: 1;
+        object-position: center;
       }
 
       .app-splash-dots {
         position: absolute;
-        bottom: 16%;
+        bottom: 10.6%;
         left: 50%;
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 18px;
         transform: translateX(-50%);
       }
 
       .app-splash-dot {
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         background: #d2d4d4;
         animation: app-splash-dot-bounce 1.05s ease-in-out infinite;
@@ -4736,14 +4726,18 @@
       role="status"
       aria-label="جارٍ فتح BonChat"
     >
-      <div class="app-splash-brand" aria-hidden="true">
-        <img class="app-splash-logo" src="./bonchat-icon-192.png" alt="" />
-        <span class="app-splash-word">BonChat</span>
-      </div>
-      <div class="app-splash-dots" aria-hidden="true">
-        <span class="app-splash-dot"></span>
-        <span class="app-splash-dot"></span>
-        <span class="app-splash-dot"></span>
+      <div class="app-splash-artboard">
+        <img
+          class="app-splash-artwork"
+          src="./bonchat-splash-screen.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="app-splash-dots" aria-hidden="true">
+          <span class="app-splash-dot"></span>
+          <span class="app-splash-dot"></span>
+          <span class="app-splash-dot"></span>
+        </div>
       </div>
     </div>
     <main class="screen-frame join-mode" id="app-frame" aria-label="BonChat join server">
