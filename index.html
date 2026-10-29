@@ -9,7 +9,7 @@
     <meta name="application-name" content="BonChat" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="./bonchat-icon-192.png" />
-    <link rel="apple-touch-icon" href="./bonchat-icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./bonchat-icon-180.png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -146,6 +146,100 @@
         font-weight: 700;
         line-height: 1;
         letter-spacing: -1.8px;
+      }
+
+      .app-splash-screen {
+        position: fixed;
+        z-index: 100000;
+        inset: 0;
+        overflow: hidden;
+        background: #fff;
+        opacity: 1;
+        transition: opacity 320ms ease, visibility 320ms ease;
+      }
+
+      .app-splash-screen.is-hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .app-splash-brand {
+        position: absolute;
+        top: 39%;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+      }
+
+      .app-splash-logo {
+        display: block;
+        width: clamp(62px, 18vw, 84px);
+        height: clamp(62px, 18vw, 84px);
+        object-fit: contain;
+      }
+
+      .app-splash-word {
+        color: #07957a;
+        font-family: Arial, sans-serif;
+        font-size: clamp(34px, 9vw, 48px);
+        font-style: italic;
+        font-weight: 700;
+        letter-spacing: -1.8px;
+        line-height: 1;
+      }
+
+      .app-splash-dots {
+        position: absolute;
+        bottom: 16%;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transform: translateX(-50%);
+      }
+
+      .app-splash-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d2d4d4;
+        animation: app-splash-dot-bounce 1.05s ease-in-out infinite;
+      }
+
+      .app-splash-dot:nth-child(2) {
+        animation-delay: 150ms;
+      }
+
+      .app-splash-dot:nth-child(3) {
+        animation-delay: 300ms;
+      }
+
+      @keyframes app-splash-dot-bounce {
+        0%,
+        80%,
+        100% {
+          opacity: 0.58;
+          transform: translateY(0) scale(0.82);
+        }
+
+        40% {
+          opacity: 1;
+          transform: translateY(-7px) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .app-splash-screen {
+          transition: none;
+        }
+
+        .app-splash-dot {
+          animation: none;
+        }
       }
 
       .subtitle {
@@ -4634,6 +4728,22 @@
     </style>
   </head>
   <body>
+    <div
+      class="app-splash-screen"
+      id="app-splash-screen"
+      role="status"
+      aria-label="جارٍ فتح BonChat"
+    >
+      <div class="app-splash-brand" aria-hidden="true">
+        <img class="app-splash-logo" src="./bonchat-icon-192.png" alt="" />
+        <span class="app-splash-word">BonChat</span>
+      </div>
+      <div class="app-splash-dots" aria-hidden="true">
+        <span class="app-splash-dot"></span>
+        <span class="app-splash-dot"></span>
+        <span class="app-splash-dot"></span>
+      </div>
+    </div>
     <main class="screen-frame join-mode" id="app-frame" aria-label="BonChat join server">
       <section class="main-area" id="join-screen">
         <button
@@ -5991,6 +6101,15 @@
               <div class="app-settings-dialog-actions">
                 <button id="app-settings-logout-cancel" type="button">إلغاء</button>
                 <button id="app-settings-logout-confirm" type="button">حسنًا</button>
+              </div>
+            </section>
+          </div>
+          <div class="app-settings-dialog" id="app-install-help-dialog" role="presentation" hidden>
+            <section class="app-settings-dialog-card" role="dialog" aria-modal="true" aria-labelledby="app-install-help-title">
+              <h3 id="app-install-help-title">تثبيت BonChat</h3>
+              <p id="app-install-help-message"></p>
+              <div class="app-settings-dialog-actions">
+                <button id="app-install-help-close" type="button">حسنًا</button>
               </div>
             </section>
           </div>
@@ -9308,19 +9427,86 @@
       document
         .getElementById("app-settings-back")
         .addEventListener("click", closeAppSettings);
+      const installHelpDialog = document.getElementById(
+        "app-install-help-dialog",
+      );
+      const installHelpMessage = document.getElementById(
+        "app-install-help-message",
+      );
+      const installHelpCloseButton = document.getElementById(
+        "app-install-help-close",
+      );
+      function closeInstallHelpDialog() {
+        installHelpDialog.hidden = true;
+        document
+          .getElementById("app-settings-install")
+          .focus({ preventScroll: true });
+      }
+      function openInstallHelpDialog() {
+        const userAgent = navigator.userAgent || "";
+        const alreadyInstalled =
+          window.matchMedia?.("(display-mode: standalone)").matches ||
+          navigator.standalone === true;
+        let message;
+
+        if (alreadyInstalled) {
+          message = "BonChat مثبت بالفعل على هذا الجهاز.";
+        } else if (
+          /iPhone|iPad|iPod/i.test(userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+        ) {
+          message =
+            "على iPhone أو iPad: افتح قائمة المشاركة في المتصفح واختر «إضافة إلى الشاشة الرئيسية» ثم «إضافة». إذا لم يظهر الخيار، افتح رابط BonChat في Safari. يطلب iOS الإضافة يدويًا ولا يسمح للموقع بفتح نافذة تثبيت تلقائيًا.";
+        } else if (/Android/i.test(userAgent) && /SamsungBrowser/i.test(userAgent)) {
+          message =
+            "في Samsung Internet افتح القائمة، ثم اختر «إضافة الصفحة إلى» وبعدها «الشاشة الرئيسية» أو «تثبيت التطبيق» إذا ظهر.";
+        } else if (/Android/i.test(userAgent) && /Firefox/i.test(userAgent)) {
+          message =
+            "في Firefox على Android افتح القائمة ⋮ وابحث عن «تثبيت» أو «إضافة إلى الشاشة الرئيسية». قد يختلف الاسم حسب إصدار المتصفح.";
+        } else if (/Android/i.test(userAgent) && /EdgA|EdgiOS/i.test(userAgent)) {
+          message =
+            "في Microsoft Edge على Android افتح القائمة ⋯ واختر «إضافة إلى الهاتف» أو «تثبيت التطبيق» إذا ظهر.";
+        } else if (/Android/i.test(userAgent)) {
+          message =
+            "افتح قائمة المتصفح وابحث عن «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». يظهر التثبيت كتطبيق مستقل في المتصفحات التي تدعم تثبيت تطبيقات الويب.";
+        } else if (/Edg/i.test(userAgent)) {
+          message =
+            "في Microsoft Edge افتح القائمة، ثم «التطبيقات» واختر «تثبيت هذا الموقع كتطبيق».";
+        } else if (/Firefox/i.test(userAgent)) {
+          message =
+            "Firefox على الكمبيوتر لا يوفر تثبيت تطبيقات الويب كبرنامج مباشرة. افتح رابط BonChat في متصفح يدعم تثبيت PWA، مثل Edge أو Chrome، ثم اختر «تثبيت التطبيق».";
+        } else if (/Safari/i.test(userAgent)) {
+          message =
+            "في Safari على macOS افتح قائمة «ملف» وابحث عن «إضافة إلى Dock» إذا كان الخيار متاحًا في إصدارك.";
+        } else {
+          message =
+            "افتح قائمة المتصفح وابحث عن «تثبيت التطبيق» أو «تثبيت هذه الصفحة كتطبيق». إذا لم يظهر الخيار، استخدم متصفحًا يدعم تثبيت تطبيقات الويب.";
+        }
+
+        installHelpMessage.textContent = message;
+        installHelpDialog.hidden = false;
+        installHelpCloseButton.focus({ preventScroll: true });
+      }
       document
         .getElementById("app-settings-install")
         .addEventListener("click", async () => {
           if (!deferredInstallPrompt) {
-            window.alert(
-              "إذا لم يظهر طلب التثبيت، افتح قائمة Chrome ⋮ واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».",
-            );
+            openInstallHelpDialog();
             return;
           }
-          await deferredInstallPrompt.prompt();
-          await deferredInstallPrompt.userChoice;
+          const installPrompt = deferredInstallPrompt;
           deferredInstallPrompt = null;
+          try {
+            await installPrompt.prompt();
+            await installPrompt.userChoice;
+          } catch {
+            openInstallHelpDialog();
+          }
         });
+      installHelpCloseButton.addEventListener("click", closeInstallHelpDialog);
+      installHelpDialog.addEventListener("click", (event) => {
+        if (event.target === installHelpDialog) closeInstallHelpDialog();
+      });
       document.querySelectorAll("[data-app-settings-open]").forEach((button) => {
         button.addEventListener("click", () =>
           openAppSettingsDetail(button.dataset.appSettingsOpen),
@@ -10297,6 +10483,7 @@
               "app-privacy-app-lock-dialog": "app-privacy-app-lock-open",
               "app-privacy-night-lock-dialog": "app-privacy-night-lock-open",
               "app-privacy-blocked-dialog": "app-privacy-blocked-open",
+              "app-install-help-dialog": "app-settings-install",
               "app-troubleshooting-update-dialog": "app-troubleshooting-refresh",
               "app-troubleshooting-cache-dialog": "app-troubleshooting-cache",
               "app-switch-account-edit-dialog": "app-switch-account-edit",
@@ -10680,6 +10867,23 @@
             );
         });
       }
+      const appSplashScreen = document.getElementById("app-splash-screen");
+      const appSplashStartedAt = performance.now();
+      let appSplashHideTimer = null;
+      let appSplashWasHidden = false;
+      function scheduleAppSplashHide() {
+        if (appSplashHideTimer !== null || appSplashWasHidden) return;
+        const remainingTime = Math.max(
+          0,
+          950 - (performance.now() - appSplashStartedAt),
+        );
+        appSplashHideTimer = window.setTimeout(() => {
+          appSplashWasHidden = true;
+          appSplashScreen?.classList.add("is-hidden");
+        }, remainingTime);
+      }
+      window.addEventListener("load", scheduleAppSplashHide, { once: true });
+      window.setTimeout(scheduleAppSplashHide, 3200);
     </script>
   </body>
 </html>

@@ -2,6 +2,7 @@ const CACHE_NAME = "bonchat-shell-v1";
 const APP_SHELL = [
   "./index.html",
   "./manifest.webmanifest",
+  "./bonchat-icon-180.png",
   "./bonchat-icon-192.png",
   "./bonchat-icon-512.png",
   "./bonchat-icon-192-maskable.png",
