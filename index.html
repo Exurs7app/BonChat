@@ -628,7 +628,7 @@
       .language-screen {
         position: absolute;
         inset: 0;
-        z-index: 5;
+        z-index: 40;
         display: flex;
         width: 100%;
         height: 100%;
@@ -636,7 +636,7 @@
         min-height: 100dvh;
         flex-direction: column;
         overflow: hidden;
-        padding: 0 20px 10px;
+        padding: 0;
         background: #fff;
         color: #111;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -649,12 +649,14 @@
         flex: 0 0 60px;
         align-items: center;
         justify-content: center;
+        padding: 0 16px;
+        border-bottom: 1px solid #e8e8e8;
       }
 
       .language-header h1 {
         margin: 0;
         color: #111;
-        font-size: 19px;
+        font-size: 17px;
         font-style: normal;
         font-weight: 500;
         line-height: 1.3;
@@ -664,8 +666,7 @@
         outline: none;
       }
 
-      .language-back,
-      .language-save {
+      .language-back {
         position: absolute;
         top: 50%;
         display: flex;
@@ -677,7 +678,7 @@
       }
 
       .language-back {
-        right: 0;
+        right: 14px;
         width: 32px;
         padding: 0;
         border: 0;
@@ -687,24 +688,7 @@
         font-size: 19px;
       }
 
-      .language-save {
-        left: 0;
-        min-width: 58px;
-        padding: 0 11px;
-        border: 0;
-        border-radius: 5px;
-        background: #149b83;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 500;
-      }
-
-      .language-save[hidden] {
-        display: none !important;
-      }
-
       .language-back:focus-visible,
-      .language-save:focus-visible,
       .language-option:focus-visible {
         outline: 2px solid #1688c4;
         outline-offset: 2px;
@@ -713,26 +697,31 @@
       .language-list {
         min-height: 0;
         flex: 1;
-        margin-inline: -20px;
+        margin: 0;
         overflow-y: auto;
         overscroll-behavior: contain;
-        border: 1px solid #e8e8e8;
-        border-radius: 16px;
+        border: 0;
+        border-radius: 0;
         background: #fff;
+        padding-bottom: env(safe-area-inset-bottom);
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
+        scrollbar-width: none;
         touch-action: pan-y;
+      }
+
+      .language-list::-webkit-scrollbar {
+        display: none;
       }
 
       .language-option {
         position: relative;
         display: flex;
         width: 100%;
-        min-height: 58px;
+        min-height: 70px;
         align-items: center;
         justify-content: flex-end;
         direction: ltr;
-        padding: 6px 18px 6px 48px;
+        padding: 6px 22px 6px 58px;
         border: 0;
         border-bottom: 1px solid #ededed;
         background: transparent;
@@ -747,7 +736,7 @@
       }
 
       .language-option[data-language="system"] {
-        min-height: 42px;
+        min-height: 54px;
         padding-block: 4px;
       }
 
@@ -761,6 +750,7 @@
       }
 
       .language-option[data-language="system"] .language-label {
+        display: none;
         font-size: 12px;
         line-height: 1.15;
       }
@@ -786,7 +776,7 @@
 
       .language-option-check {
         position: absolute;
-        left: 18px;
+        left: 28px;
         display: none;
         color: #4a998b;
         font-size: 17px;
@@ -5034,7 +5024,6 @@
             <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
           <h1 id="language-title" tabindex="-1">لغة الواجهة</h1>
-          <button class="language-save" id="language-save" type="button" hidden>حفظ</button>
         </header>
         <div
           class="language-list"
@@ -5048,7 +5037,7 @@
             <i class="fa-solid fa-check language-option-check" aria-hidden="true"></i>
           </button>
           <button class="language-option" type="button" role="option" data-language="en" aria-selected="false">
-            <span class="language-option-content"><span class="language-native">الإنجليزية</span><span class="language-label" dir="auto">English</span></span>
+            <span class="language-option-content"><span class="language-native">بالإنجليزية</span><span class="language-label" dir="auto">English</span></span>
             <i class="fa-solid fa-check language-option-check" aria-hidden="true"></i>
           </button>
           <button class="language-option" type="button" role="option" data-language="zh-Hans" aria-selected="false">
@@ -6093,7 +6082,7 @@
           <div class="app-settings-dialog" id="app-settings-logout-dialog" role="presentation" hidden>
             <section class="app-settings-dialog-card" role="dialog" aria-modal="true" aria-labelledby="app-settings-logout-title">
               <h3 id="app-settings-logout-title">تسجيل الخروج</h3>
-              <p>هذه النسخة تعمل محليًا ولا تتصل بخادم الحساب؛ لذلك لا يمكن تنفيذ تسجيل خروج فعلي منها.</p>
+              <p>سيؤدي تسجيل الخروج إلى حذف الجلسة المحفوظة على هذا المتصفح وإعادتك إلى شاشة الانضمام.</p>
               <div class="app-settings-dialog-actions">
                 <button id="app-settings-logout-cancel" type="button">إلغاء</button>
                 <button id="app-settings-logout-confirm" type="button">حسنًا</button>
@@ -6585,23 +6574,23 @@
           </header>
           <div class="online-device-list">
             <div class="online-device-section-title">الجهاز الرئيسي</div>
-            <button class="online-device-card" id="online-device-open" type="button" aria-label="عرض تفاصيل جهاز Samsung">
+            <button class="online-device-card" id="online-device-open" type="button" aria-label="عرض تفاصيل الجهاز الحالي">
               <span class="online-device-primary">
                 <span class="online-device-name-line">
-                  <span class="online-device-name">samsung</span>
-                  <span class="online-device-status">أونلاين الآن</span>
+                  <span class="online-device-name" id="online-device-name">جارٍ تحديد الجهاز…</span>
+                  <span class="online-device-status" id="online-device-list-status">جارٍ التحقق…</span>
                 </span>
                 <span class="online-device-version">1.0.141</span>
               </span>
               <span class="online-device-meta">
-                <span>29 أكتوبر، 16:30</span>
-                <span class="online-device-ip">45.149.24.70</span>
+                <span id="online-device-last-seen">جارٍ التحديث…</span>
+                <span class="online-device-ip" id="online-device-ip" dir="ltr">جارٍ التحقق…</span>
               </span>
               <svg class="online-device-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-            <p class="online-device-note">تعرض هذه الصفحة بيانات الجهاز الظاهرة في الصورة المرجعية.</p>
+            <p class="online-device-note">لإظهار IP العام، يرسل المتصفح طلبًا إلى ipify.org الذي يتلقى عنوان اتصالك.</p>
           </div>
         </section>
 
@@ -6619,22 +6608,22 @@
               <div class="online-device-detail-row" role="listitem">
                 <span>اسم الجهاز</span>
                 <span class="online-device-detail-value online-device-detail-device">
-                  <span>samsung</span>
-                  <span class="online-device-status">أونلاين</span>
+                  <span id="online-device-detail-name">جارٍ تحديد الجهاز…</span>
+                  <span class="online-device-status" id="online-device-detail-status">جارٍ التحقق…</span>
                 </span>
               </div>
               <div class="online-device-detail-row" role="listitem">
                 <span>نوع الجهاز</span>
-                <span class="online-device-detail-value">الجهاز الرئيسي</span>
+                <span class="online-device-detail-value" id="online-device-type">جارٍ التحقق…</span>
               </div>
               <div class="online-device-group-separator" aria-hidden="true"></div>
               <div class="online-device-detail-row" role="listitem">
-                <span>آخر مرة تسجيل دخول</span>
-                <span class="online-device-detail-value">29 أكتوبر، 16:30</span>
+                <span>آخر نشاط</span>
+                <span class="online-device-detail-value" id="online-device-detail-last-seen">جارٍ التحديث…</span>
               </div>
               <div class="online-device-detail-row" role="listitem">
                 <span>IP</span>
-                <span class="online-device-detail-value" dir="ltr">45.149.24.70</span>
+                <span class="online-device-detail-value" id="online-device-detail-ip" dir="ltr">جارٍ التحقق…</span>
               </div>
               <div class="online-device-detail-row" role="listitem">
                 <span>النسخة</span>
@@ -6976,6 +6965,13 @@
       const serverAddressInput = document.getElementById("server-address");
       const joinForm = serverAddressInput.closest(".join-form");
       const joinButton = joinForm.querySelector(".join-button");
+      const ALLOWED_SERVER_ID = "qc0002";
+      const LOCAL_SESSION_KEY = "bonchat-local-session-v1";
+      let serverAccessGranted = false;
+      try {
+        serverAccessGranted =
+          localStorage.getItem(LOCAL_SESSION_KEY) === "active";
+      } catch {}
       let switchAccountLoginReturn = false;
       const switchAccountLoginBack = document.getElementById(
         "switch-account-login-back",
@@ -7314,7 +7310,6 @@
       const languageSystemCurrent = document.getElementById(
         "language-system-current",
       );
-      const languageSaveButton = document.getElementById("language-save");
       let qrScannerOpen = false;
       let qrScannerSession = 0;
       let qrCameraStream = null;
@@ -7324,6 +7319,7 @@
       let joinLoadingTimer = 0;
       let selectedLanguage = "system";
       let pendingLanguage = "system";
+      let languageReturnTarget = "settings";
       try {
         const savedLanguage = localStorage.getItem("bonchat-language");
         if (
@@ -7414,7 +7410,6 @@
             String(option.dataset.language === pendingLanguage),
           );
         });
-        languageSaveButton.hidden = pendingLanguage === selectedLanguage;
       }
 
       function updateLanguageSettingLabel() {
@@ -7433,7 +7428,8 @@
             : nativeName || localName || "English";
       }
 
-      function showLanguage(open) {
+      function showLanguage(open, returnTarget = "settings") {
+        if (open) languageReturnTarget = returnTarget;
         document.documentElement.style.touchAction = open ? "pan-y" : "";
         document.body.style.touchAction = open ? "pan-y" : "";
         frame.style.touchAction = open ? "pan-y" : "";
@@ -7447,7 +7443,15 @@
         frame.classList.add("settings-mode");
         frame.classList.remove("join-mode");
         frame.setAttribute("aria-label", "لغة واجهة BonChat");
-        history.replaceState(null, "", open ? "#language" : "#settings");
+        history.replaceState(
+          null,
+          "",
+          open
+            ? returnTarget === "app-general"
+              ? "#app-settings-general"
+              : "#language"
+            : "#settings",
+        );
         if (open) {
           updateSystemLanguageLabel();
           updateLanguageSelection(selectedLanguage);
@@ -7455,6 +7459,25 @@
             .getElementById("language-title")
             .focus({ preventScroll: true });
         }
+      }
+
+      function closeLanguageScreen() {
+        const returnTarget = languageReturnTarget;
+        languageReturnTarget = "settings";
+        if (returnTarget === "app-general") {
+          languageScreen.hidden = true;
+          document.documentElement.style.touchAction = "";
+          document.body.style.touchAction = "";
+          frame.style.touchAction = "";
+          frame.setAttribute("aria-label", "إعدادات BonChat العامة");
+          history.replaceState(null, "", "#app-settings-general");
+          document
+            .querySelector('[data-general-open="language"]')
+            ?.focus({ preventScroll: true });
+          return;
+        }
+        showSettings(true);
+        document.getElementById("language-open").focus();
       }
 
       function showSettings(open) {
@@ -7535,66 +7558,7 @@
       }
 
       function isValidServerAddress(value) {
-        const address = String(value || "").trim();
-        if (!address || address.length > 253) return false;
-        if (/^[A-Za-z0-9_-]{1,64}$/.test(address)) return true;
-
-        const ipv4 = address.match(
-          /^((?:\d{1,3}\.){3}\d{1,3})(?::(\d{1,5}))?$/,
-        );
-        if (ipv4) {
-          const octetsValid = ipv4[1]
-            .split(".")
-            .every((part) => Number(part) <= 255);
-          const portValid = !ipv4[2] || Number(ipv4[2]) <= 65535;
-          return octetsValid && portValid;
-        }
-
-        const hostname = address.match(
-          /^([A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?)(?::(\d{1,5}))?$/,
-        );
-        if (hostname) {
-          const labels = hostname[1].split(".");
-          const hostnameValid = labels.every(
-            (label) =>
-              label.length > 0 &&
-              label.length <= 63 &&
-              /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(label),
-          );
-          const portValid = !hostname[2] || Number(hostname[2]) <= 65535;
-          if (hostnameValid && portValid) return true;
-        }
-
-        if (/^[0-9A-Fa-f:]+$/.test(address) && address.includes(":")) {
-          try {
-            new URL(`http://[${address}]`);
-            return true;
-          } catch {}
-        }
-        return false;
-      }
-
-      function sanitizeServerAddress() {
-        const original = serverAddressInput.value;
-        const originalCaret = serverAddressInput.selectionStart ?? original.length;
-        const sanitized = original.replace(/[^A-Za-z0-9._:-]/g, "");
-        if (sanitized !== original) {
-          const sanitizedCaret = original
-            .slice(0, originalCaret)
-            .replace(/[^A-Za-z0-9._:-]/g, "").length;
-          serverAddressInput.value = sanitized;
-          serverAddressInput.setSelectionRange(sanitizedCaret, sanitizedCaret);
-        }
-        updateJoinAvailability();
-      }
-
-      function insertAllowedServerText(text) {
-        const allowed = String(text || "").replace(/[^A-Za-z0-9._:-]/g, "");
-        if (!allowed) return;
-        const start = serverAddressInput.selectionStart ?? serverAddressInput.value.length;
-        const end = serverAddressInput.selectionEnd ?? start;
-        serverAddressInput.setRangeText(allowed, start, end, "end");
-        sanitizeServerAddress();
+        return value === ALLOWED_SERVER_ID;
       }
 
       function messageFilterButtons() {
@@ -8483,6 +8447,211 @@
         profileDetailScreen.hidden = false;
       }
 
+      let onlineDeviceRefreshPromise = null;
+
+      function setOnlineDeviceStatus(status, detailStatus = status) {
+        document.getElementById("online-device-list-status").textContent =
+          status;
+        document.getElementById("online-device-detail-status").textContent =
+          detailStatus;
+      }
+
+      function setOnlineDeviceIdentity(identity) {
+        document.getElementById("online-device-name").textContent = identity.name;
+        document.getElementById("online-device-detail-name").textContent =
+          identity.name;
+        document.getElementById("online-device-type").textContent =
+          identity.type;
+        document.getElementById("online-device-open").setAttribute(
+          "aria-label",
+          `عرض تفاصيل جهاز ${identity.name}`,
+        );
+      }
+
+      function formatOnlineDeviceActivity(date) {
+        return new Intl.DateTimeFormat("ar", {
+          day: "numeric",
+          month: "long",
+          hour: "2-digit",
+          minute: "2-digit",
+        }).format(date);
+      }
+
+      async function readCurrentDeviceIdentity() {
+        const userAgent = navigator.userAgent || "";
+        const userAgentData = navigator.userAgentData;
+        let model = String(userAgentData?.model || "").trim();
+        let platform = String(userAgentData?.platform || "").trim();
+        let platformVersion = "";
+
+        if (typeof userAgentData?.getHighEntropyValues === "function") {
+          try {
+            const hints = await userAgentData.getHighEntropyValues([
+              "model",
+              "platform",
+              "platformVersion",
+            ]);
+            model ||= String(hints.model || "").trim();
+            platform ||= String(hints.platform || "").trim();
+            platformVersion = String(hints.platformVersion || "").trim();
+          } catch {}
+        }
+
+        const androidMatch = userAgent.match(
+          /Android\s+([\d.]+)(?:;\s*([^;)]+))?/i,
+        );
+        const iosMatch = userAgent.match(
+          /CPU (?:iPhone )?OS ([\d_]+)/i,
+        );
+        const isAndroid = /Android/i.test(userAgent) || /Android/i.test(platform);
+        const isIPhone = /iPhone/i.test(userAgent);
+        const isIPad =
+          /iPad/i.test(userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+        if (!model && androidMatch?.[2]) {
+          model = androidMatch[2].replace(/\s+Build\/.*$/i, "").trim();
+        }
+        if (/^(?:K|unknown|generic)$/i.test(model) || model.length < 2) {
+          model = "";
+        }
+        if (/^SM-[A-Z0-9-]+$/i.test(model)) {
+          model = `Samsung ${model.toUpperCase()}`;
+        } else if (/^Pixel\b/i.test(model)) {
+          model = `Google ${model}`;
+        }
+
+        let osName = platform;
+        if (isAndroid) osName = "Android";
+        else if (isIPhone) osName = "iOS";
+        else if (isIPad) osName = "iPadOS";
+        else if (!osName && /Windows/i.test(userAgent)) osName = "Windows";
+        else if (!osName && /Mac OS/i.test(userAgent)) osName = "macOS";
+        else if (!osName && /Linux/i.test(userAgent)) osName = "Linux";
+
+        const osVersion =
+          platformVersion ||
+          androidMatch?.[1] ||
+          (isIPhone || isIPad ? iosMatch?.[1]?.replaceAll("_", ".") : "") ||
+          "";
+        const deviceCategory = isAndroid
+          ? "هاتف Android"
+          : isIPhone
+            ? "iPhone"
+            : isIPad
+              ? "iPad"
+              : "الجهاز الحالي";
+        const name =
+          model ||
+          (isAndroid
+            ? "هاتف Android"
+            : isIPhone
+              ? "iPhone"
+              : isIPad
+                ? "iPad"
+                : "الجهاز الحالي");
+        const type = [deviceCategory, [osName, osVersion].filter(Boolean).join(" ")]
+          .filter(Boolean)
+          .join(" · ");
+
+        return { name, type };
+      }
+
+      function isIpAddress(value) {
+        const ip = String(value || "").trim();
+        const ipv4Parts = ip.split(".");
+        if (
+          ipv4Parts.length === 4 &&
+          ipv4Parts.every(
+            (part) => /^\d{1,3}$/.test(part) && Number(part) <= 255,
+          )
+        ) {
+          return true;
+        }
+        if (!/^[0-9a-f:.]+$/i.test(ip) || !ip.includes(":")) return false;
+        try {
+          new URL(`http://[${ip}]/`);
+          return true;
+        } catch {
+          return false;
+        }
+      }
+
+      async function lookupPublicIp() {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 8000);
+        try {
+          const response = await fetch(
+            "https://api64.ipify.org?format=json",
+            {
+              method: "GET",
+              mode: "cors",
+              cache: "no-store",
+              headers: { Accept: "application/json" },
+              signal: controller.signal,
+            },
+          );
+          if (!response.ok) throw new Error("IP lookup failed");
+          const data = await response.json();
+          const ip = String(data?.ip || "").trim();
+          if (!isIpAddress(ip)) throw new Error("Invalid IP response");
+          return ip;
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      function refreshOnlineDeviceInfo() {
+        if (onlineDeviceRefreshPromise) return onlineDeviceRefreshPromise;
+
+        const activityTime = formatOnlineDeviceActivity(new Date());
+        document.getElementById("online-device-last-seen").textContent =
+          activityTime;
+        document.getElementById("online-device-detail-last-seen").textContent =
+          activityTime;
+        document.getElementById("online-device-ip").textContent =
+          "جارٍ التحقق…";
+        document.getElementById("online-device-detail-ip").textContent =
+          "جارٍ التحقق…";
+        setOnlineDeviceStatus("جارٍ التحقق…");
+
+        onlineDeviceRefreshPromise = (async () => {
+          const [identityResult, ipResult] = await Promise.allSettled([
+            readCurrentDeviceIdentity(),
+            lookupPublicIp(),
+          ]);
+
+          if (identityResult.status === "fulfilled") {
+            setOnlineDeviceIdentity(identityResult.value);
+          } else {
+            setOnlineDeviceIdentity({
+              name: "الجهاز الحالي",
+              type: "غير متاح من المتصفح",
+            });
+          }
+
+          if (ipResult.status === "fulfilled") {
+            document.getElementById("online-device-ip").textContent =
+              ipResult.value;
+            document.getElementById("online-device-detail-ip").textContent =
+              ipResult.value;
+            setOnlineDeviceStatus("أونلاين الآن", "أونلاين");
+          } else {
+            const failureText =
+              navigator.onLine === false ? "غير متصل" : "تعذر التحقق";
+            document.getElementById("online-device-ip").textContent =
+              "غير متاح";
+            document.getElementById("online-device-detail-ip").textContent =
+              "غير متاح";
+            setOnlineDeviceStatus(failureText);
+          }
+        })().finally(() => {
+          onlineDeviceRefreshPromise = null;
+        });
+
+        return onlineDeviceRefreshPromise;
+      }
+
       function openOnlineDevices() {
         closeContactsPlusMenu();
         profileScreen.hidden = true;
@@ -8491,6 +8660,7 @@
         profileBioEditScreen.hidden = true;
         onlineDeviceDetailScreen.hidden = true;
         onlineDevicesScreen.hidden = false;
+        refreshOnlineDeviceInfo();
         document.getElementById("online-devices-back").focus({
           preventScroll: true,
         });
@@ -8654,6 +8824,20 @@
       }
 
       function openMessagesApp() {
+        if (!serverAccessGranted) {
+          joinLoadingModal.hidden = true;
+          messagesScreen.hidden = true;
+          joinScreen.hidden = false;
+          frame.classList.add("join-mode");
+          frame.classList.remove("settings-mode");
+          frame.setAttribute("aria-label", "BonChat join server");
+          if (location.hash === "#messages" ||
+              location.hash === "#messages-settings" ||
+              location.hash.startsWith("#app-settings-")) {
+            history.replaceState(null, "", location.pathname + location.search);
+          }
+          return;
+        }
         joinLoadingModal.hidden = true;
         joinLoadingSpinner.hidden = false;
         joinLoadingClose.hidden = true;
@@ -8978,6 +9162,10 @@
           switchAccountLoginStatus.hidden = false;
           return;
         }
+        if (!isValidServerAddress(serverAddressInput.value)) {
+          updateJoinAvailability();
+          return;
+        }
         if (joinButton.disabled || joinLoadingTimer) return;
         joinLoadingMessage.textContent = "جارٍ فتح التطبيق...";
         joinLoadingSpinner.hidden = false;
@@ -8985,6 +9173,10 @@
         joinLoadingModal.hidden = false;
         joinLoadingTimer = window.setTimeout(() => {
           joinLoadingTimer = 0;
+          serverAccessGranted = true;
+          try {
+            localStorage.setItem(LOCAL_SESSION_KEY, "active");
+          } catch {}
           openMessagesApp();
         }, 450);
       }
@@ -9098,17 +9290,19 @@
       }
 
       function acceptQrValue(value) {
-        const serverAddress = String(value || "").trim();
+        const serverAddress = String(value || "");
         if (!serverAddress) return;
         const fromMessages = qrOpenedFromMessages;
         closeQrScanner(false);
         if (fromMessages) {
+          const contactQuery = serverAddress.trim();
+          if (!contactQuery) return;
           messagesInbox.hidden = true;
           contactsScreen.hidden = true;
           contactsSearchScreen.hidden = true;
           profileScreen.hidden = true;
           newFriendsScreen.hidden = false;
-          newFriendSearchInput.value = serverAddress;
+          newFriendSearchInput.value = contactQuery;
           newFriendSearchInput.dispatchEvent(
             new Event("input", { bubbles: true }),
           );
@@ -9302,29 +9496,9 @@
       });
       window.addEventListener("pagehide", stopQrCamera);
 
-      serverAddressInput.addEventListener("beforeinput", (event) => {
-        if (!event.inputType?.startsWith("insert")) return;
-        const insertedText =
-          event.data ?? event.dataTransfer?.getData("text/plain");
-        if (insertedText == null) return;
-        const allowedText = insertedText.replace(/[^A-Za-z0-9._:-]/g, "");
-        if (allowedText === insertedText) return;
-        event.preventDefault();
-        insertAllowedServerText(allowedText);
-      });
-      serverAddressInput.addEventListener("input", sanitizeServerAddress);
-      serverAddressInput.addEventListener("change", sanitizeServerAddress);
-      serverAddressInput.addEventListener("compositionend", sanitizeServerAddress);
-      serverAddressInput.addEventListener("paste", (event) => {
-        event.preventDefault();
-        insertAllowedServerText(
-          event.clipboardData?.getData("text/plain") || "",
-        );
-      });
-      serverAddressInput.addEventListener("drop", (event) => {
-        event.preventDefault();
-        insertAllowedServerText(event.dataTransfer?.getData("text/plain") || "");
-      });
+      serverAddressInput.addEventListener("input", updateJoinAvailability);
+      serverAddressInput.addEventListener("change", updateJoinAvailability);
+      serverAddressInput.addEventListener("compositionend", updateJoinAvailability);
       joinForm.addEventListener("submit", (event) => {
         event.preventDefault();
         startJoinAttempt();
@@ -9333,7 +9507,7 @@
       joinLoadingModal.addEventListener("click", (event) => {
         if (event.target === joinLoadingModal) closeJoinAttempt();
       });
-      sanitizeServerAddress();
+      updateJoinAvailability();
 
       messagesSearchInput.addEventListener("input", updateMessagesList);
       messagesFilters.addEventListener("click", (event) => {
@@ -9517,8 +9691,11 @@
         button.addEventListener("click", () => {
           const key = button.dataset.generalOpen;
           lastGeneralSettingsButton = button;
+          if (key === "language") {
+            showLanguage(true, "app-general");
+            return;
+          }
           const titles = {
-            language: "اللغة",
             appearance: "المظهر",
             "text-size": "حجم النص",
             "storage-limit": "خزينة ملفات الدردشة",
@@ -10083,11 +10260,7 @@
       document
         .getElementById("app-switch-account-logout-ok")
         .addEventListener("click", () => {
-          switchAccountLogoutDialog.hidden = true;
-          document
-            .getElementById("app-switch-account-login")
-            .focus({ preventScroll: true });
-
+          performLocalLogout();
         });
       [switchAccountDeleteDialog, switchAccountLogoutDialog].forEach((d) => {
         d.addEventListener("click", (event) => {
@@ -10176,12 +10349,36 @@
           .getElementById("app-settings-logout-open")
           .focus({ preventScroll: true });
       }
+      function performLocalLogout() {
+        try {
+          localStorage.removeItem(LOCAL_SESSION_KEY);
+        } catch {}
+        serverAccessGranted = false;
+        switchAccountLoginReturn = false;
+        switchAccountLoginBack.hidden = true;
+        switchAccountLoginStatus.hidden = true;
+        appSettingsLogoutDialog.hidden = true;
+        switchAccountLogoutDialog.hidden = true;
+        if (joinLoadingTimer) {
+          window.clearTimeout(joinLoadingTimer);
+          joinLoadingTimer = 0;
+        }
+        joinLoadingModal.hidden = true;
+        messagesScreen.hidden = true;
+        appSettingsScreen.hidden = true;
+        settingsOpenButton.hidden = false;
+        showSettings(false);
+        serverAddressInput.value = "";
+        updateJoinAvailability();
+        history.replaceState(null, "", location.pathname + location.search);
+        serverAddressInput.focus({ preventScroll: true });
+      }
       document
         .getElementById("app-settings-logout-cancel")
         .addEventListener("click", closeAppSettingsLogoutDialog);
       document
         .getElementById("app-settings-logout-confirm")
-        .addEventListener("click", closeAppSettingsLogoutDialog);
+        .addEventListener("click", performLocalLogout);
       appSettingsLogoutDialog.addEventListener("click", (event) => {
         if (event.target === appSettingsLogoutDialog) {
           closeAppSettingsLogoutDialog();
@@ -10560,25 +10757,15 @@
       document
         .getElementById("language-back")
         .addEventListener("click", () => {
-          showSettings(true);
-          document.getElementById("language-open").focus();
+          closeLanguageScreen();
         });
       languageOptions.forEach((option) => {
         option.addEventListener("click", () => {
           updateLanguageSelection(option.dataset.language);
+          saveGeneralPreference("language", pendingLanguage);
+          if (languageReturnTarget === "app-general") closeLanguageScreen();
         });
       });
-      document
-        .getElementById("language-save")
-        .addEventListener("click", () => {
-          selectedLanguage = pendingLanguage;
-          try {
-            localStorage.setItem("bonchat-language", selectedLanguage);
-          } catch {}
-          updateLanguageSettingLabel();
-          showSettings(true);
-          document.getElementById("language-open").focus();
-        });
       window.addEventListener("languagechange", () => {
         updateSystemLanguageLabel();
         if (selectedLanguage === "system") {
@@ -10803,8 +10990,7 @@
         } else if (event.key === "Escape" && !localUpdateModal.hidden) {
           closeLocalUpdateModal();
         } else if (event.key === "Escape" && !languageScreen.hidden) {
-          showSettings(true);
-          document.getElementById("language-open").focus();
+          closeLanguageScreen();
         } else if (event.key === "Escape" && !appearanceScreen.hidden) {
           showSettings(true);
           document.getElementById("appearance-open").focus();
@@ -10861,7 +11047,15 @@
 
       applyAppearance();
 
-      if (location.hash === "#messages-settings") {
+      const protectedAppRoute =
+        location.hash === "#messages-settings" ||
+        location.hash === "#messages" ||
+        location.hash.startsWith("#app-settings-");
+      if (serverAccessGranted && !location.hash) {
+        openMessagesApp();
+      } else if (protectedAppRoute && !serverAccessGranted) {
+        history.replaceState(null, "", location.pathname + location.search);
+      } else if (location.hash === "#messages-settings") {
         openMessagesApp();
         openProfileScreen();
         openAppSettings();
