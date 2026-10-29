@@ -10480,8 +10480,15 @@
               "app-privacy-night-lock-dialog": "app-privacy-night-lock-open",
               "app-privacy-blocked-dialog": "app-privacy-blocked-open",
               "app-install-help-dialog": "app-settings-install",
+              "app-settings-account-edit-dialog": "app-settings-account-edit-cancel",
+              "app-settings-password-dialog": "app-settings-password-open",
+              "app-settings-deactivate-dialog": "app-settings-deactivate-open",
+              "app-account-picker-dialog": "app-settings-password-retention",
+              "app-settings-clear-messages-dialog": "app-settings-clear-messages-open",
               "app-troubleshooting-update-dialog": "app-troubleshooting-refresh",
               "app-troubleshooting-cache-dialog": "app-troubleshooting-cache",
+              "app-switch-account-delete-dialog": "app-switch-account-remove",
+              "app-switch-account-logout-dialog": "app-switch-account-login",
               "app-switch-account-edit-dialog": "app-switch-account-edit",
             };
             document
@@ -10500,12 +10507,35 @@
           !appSettingsScreen.hidden
         ) {
           closeAppSettings();
+        } else if (
+          event.key === "Escape" &&
+          switchAccountScreenEl.classList.contains("is-editing")
+        ) {
+          setSwitchAccountEditing(false);
+          switchAccountEditButton.focus({ preventScroll: true });
+        } else if (event.key === "Escape" && !profileNameEditScreen.hidden) {
+          closeProfileEdit("name");
+        } else if (event.key === "Escape" && !profileBioEditScreen.hidden) {
+          closeProfileEdit("bio");
+        } else if (
+          event.key === "Escape" &&
+          !onlineDeviceDetailScreen.hidden
+        ) {
+          closeOnlineDeviceDetails();
+        } else if (event.key === "Escape" && !onlineDevicesScreen.hidden) {
+          closeOnlineDevices();
+        } else if (event.key === "Escape" && !profileDetailScreen.hidden) {
+          closeProfileDetails();
+        } else if (event.key === "Escape" && !contactsSearchScreen.hidden) {
+          closeContactsSearch();
         } else if (event.key === "Escape" && !folderSelectionScreen.hidden) {
           closeFolderSelection();
         } else if (event.key === "Escape" && !folderEditorScreen.hidden) {
           closeFolderEditor();
         } else if (event.key === "Escape" && !newFriendsScreen.hidden) {
           closeNewFriendsScreen();
+        } else if (event.key === "Escape" && !contactsPlusMenu.hidden) {
+          closeContactsPlusMenu();
         } else if (event.key === "Escape" && !serverEmojiPicker.hidden) {
           closeServerEmojiPicker();
           serverThreadMessageInput.focus({ preventScroll: true });
@@ -10514,9 +10544,7 @@
         } else if (event.key === "Escape" && !composeDialog.hidden) {
           closeComposeDialog();
         } else if (event.key === "Escape" && !messagesThread.hidden) {
-          messagesThread.hidden = true;
-          messagesInbox.hidden = false;
-          updateMessagesList();
+          document.getElementById("thread-back").click();
         }
       });
 
@@ -10777,6 +10805,9 @@
         } else if (event.key === "Escape" && !languageScreen.hidden) {
           showSettings(true);
           document.getElementById("language-open").focus();
+        } else if (event.key === "Escape" && !appearanceScreen.hidden) {
+          showSettings(true);
+          document.getElementById("appearance-open").focus();
         } else if (event.key === "Escape" && !reportScreen.hidden) {
           if (!closeAboutReportScreen()) {
             showSettings(true);
@@ -10792,6 +10823,9 @@
             showSettings(true);
             document.getElementById("terms-open").focus();
           }
+        } else if (event.key === "Escape" && !settingsScreen.hidden) {
+          showSettings(false);
+          settingsOpenButton.focus({ preventScroll: true });
         }
       });
       document
@@ -10852,6 +10886,48 @@
       } else if (location.hash === "#settings") {
         showSettings(true);
       }
+
+      function getNativeBackStateSignature() {
+        const navigationElements = Array.from(
+          document.querySelectorAll("[hidden], [data-app-settings-detail]"),
+        )
+          .map((element) => {
+            const identity =
+              element.id ||
+              element.getAttribute("data-app-settings-detail") ||
+              element.getAttribute("data-app-settings-open") ||
+              element.className ||
+              element.tagName;
+            return `${identity}:${element.hidden ? "hidden" : "visible"}`;
+          })
+          .sort()
+          .join("|");
+        return [
+          location.hash,
+          frame.className,
+          switchAccountScreenEl.className,
+          navigationElements,
+        ].join("::");
+      }
+
+      function addNativeBackSentinel() {
+        history.pushState({ bonchatBackSentinel: true }, "", location.href);
+      }
+
+      window.addEventListener("popstate", () => {
+        const previousState = getNativeBackStateSignature();
+        document.dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key: "Escape",
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+        if (getNativeBackStateSignature() !== previousState) {
+          addNativeBackSentinel();
+        }
+      });
+      addNativeBackSentinel();
     </script>
     <script>
       if ("serviceWorker" in navigator) {
