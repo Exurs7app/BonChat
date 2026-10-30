@@ -7093,19 +7093,54 @@
       const SERVER_ADMIN_FIXED_REPLY =
         "مرحباً، خدمة BonChat متاحة على مدار الساعة. إذا واجهت أي مشاكل تشغيلية، فلا تتردد في الاتصال بنا للحصول على المساعدة. شكراً لك.";
       const QC001_SIGNAL_MESSAGE = [
-        "─── 🚀 Exklusive Handelssignale (Live) ───",
-        "",
+        "🚀 Exklusive Handelssignale (Live)",
         "📊 **Zielwert:** XAUUSD +",
         "🔐 **Aktivierungscode:** `9H3fL6kJ`",
         "⏰ **Schließungszeit:** 6:00",
         "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
-        "",
         "💡 **Ausführung:**",
         "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
-        "",
-        "─────────────────────────────",
         "VeloXCore TRADING",
-        "9H3fL6kJ",
+      ].join("\n");
+      const QC001_SIGNAL_MESSAGE_UPDATE = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `P8v9X2kL`",
+        "⏰ **Schließungszeit:** 2:00",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
+      const QC001_SIGNAL_MESSAGE_BTC = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** BTC",
+        "🔐 **Aktivierungscode:** `W5r8P1xZ`",
+        "⏰ **Schließungszeit:** 10:00",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
+      const QC001_SIGNAL_MESSAGE_BNB = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** BNB",
+        "🔐 **Aktivierungscode:** `7K3vQ9nL`",
+        "⏰ **Schließungszeit:** 4:00",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
+      const QC001_SIGNAL_MESSAGE_XAUUSD = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `Z5xW8r1P`",
+        "⏰ **Schließungszeit:** 6:00",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
       ].join("\n");
       const SERVER_ADMIN_REPLY_DELAY_MS = 60_000;
       let serverAdminReplyScheduled = false;
@@ -8947,6 +8982,60 @@
           ) {
             addThreadBubble(
               QC001_SIGNAL_MESSAGE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "9H3fL6kJ",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              QC001_SIGNAL_MESSAGE_UPDATE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "P8v9X2kL",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              QC001_SIGNAL_MESSAGE_BTC,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "W5r8P1xZ",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              QC001_SIGNAL_MESSAGE_BNB,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "7K3vQ9nL",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              QC001_SIGNAL_MESSAGE_XAUUSD,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "Z5xW8r1P",
               false,
               "",
               "thread-bubble--qc001-signal",
