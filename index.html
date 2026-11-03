@@ -3772,6 +3772,17 @@
         height: 25px;
       }
 
+      .messages-avatar--veloxcore {
+        background: transparent;
+      }
+
+      .messages-avatar--veloxcore img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+      }
+
       .messages-avatar--blue {
         background: #3157d5;
       }
@@ -3957,6 +3968,7 @@
 
       .messages-thread {
         display: flex;
+        position: relative;
       }
 
       .thread-toolbar {
@@ -4099,6 +4111,21 @@
         height: 20px;
       }
 
+      .thread-server-avatar--veloxcore {
+        background: transparent;
+      }
+
+      .thread-server-avatar--veloxcore img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+      }
+
+      .veloxcore-avatar-image[hidden] {
+        display: none !important;
+      }
+
       .thread-server-shield {
         width: 16px;
         height: 18px;
@@ -4142,6 +4169,50 @@
         line-height: 1.75;
       }
 
+      .velox-sender-row {
+        display: flex;
+        width: 100%;
+        align-items: flex-start;
+        gap: 8px;
+        direction: rtl;
+      }
+
+      .velox-sender-avatar {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        margin-top: 0;
+        border-radius: 50%;
+        background: #e5e4e2;
+        object-fit: cover;
+      }
+
+      .velox-sender-content {
+        display: flex;
+        min-width: 0;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .velox-sender-name {
+        display: flex;
+        min-height: 40px;
+        align-items: center;
+        justify-content: flex-start;
+        padding-inline: 4px;
+        color: #b4b4b4;
+        font-size: 12px;
+        line-height: 1.4;
+        text-align: right;
+      }
+
+      .messages-thread--server .velox-sender-content .thread-bubble {
+        width: fit-content;
+        max-width: 100%;
+        align-self: flex-start;
+      }
+
       .messages-thread--server .thread-bubble--qc001-signal {
         direction: ltr;
         text-align: left;
@@ -4161,6 +4232,158 @@
         font-size: 11px;
         direction: ltr;
         text-align: left;
+      }
+
+      .thread-bubble--action-selected {
+        outline: 2px solid #159b87;
+        outline-offset: 1px;
+      }
+
+      .thread-bubble--favorite::after {
+        content: "★";
+        float: left;
+        margin-inline-end: 5px;
+        color: #e1a329;
+        font-size: 13px;
+      }
+
+      .thread-message-action-menu {
+        position: absolute;
+        z-index: 22;
+        display: grid;
+        width: min(360px, calc(100% - 30px));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 7px 2px;
+        padding: 12px 8px 9px;
+        border: 1px solid #ecebe8;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 18%);
+        direction: ltr;
+      }
+
+      .thread-message-action-menu[hidden],
+      .velox-selection-toolbar[hidden],
+      .velox-message-toast[hidden],
+      .veloxcore-reply-preview[hidden] {
+        display: none !important;
+      }
+
+      .thread-message-action {
+        display: flex;
+        min-width: 0;
+        min-height: 58px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 3px 1px;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: #424549;
+        cursor: pointer;
+      }
+
+      .thread-message-action:active,
+      .thread-message-action:focus-visible {
+        background: #f1f1ef;
+        outline: none;
+      }
+
+      .thread-message-action svg {
+        width: 22px;
+        height: 22px;
+        flex: 0 0 auto;
+      }
+
+      .thread-message-action-label {
+        max-width: 100%;
+        color: #66686b;
+        font-size: 10px;
+        line-height: 1.25;
+        text-align: center;
+        direction: rtl;
+      }
+
+      .thread-message-action[data-thread-action="select"] {
+        grid-column: 4;
+      }
+
+      .velox-selection-toolbar {
+        position: absolute;
+        z-index: 19;
+        top: 64px;
+        inset-inline: 15px;
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 12px;
+        border: 1px solid #e5e5e2;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 7px rgb(0 0 0 / 10%);
+        color: #3d4144;
+        font-size: 12px;
+      }
+
+      .velox-selection-toolbar button {
+        padding: 5px 9px;
+        border: 0;
+        border-radius: 7px;
+        background: #f0f1ef;
+        color: #168f7c;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .veloxcore-reply-preview {
+        display: flex;
+        min-height: 38px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 5px 8px 7px;
+        color: #228d7b;
+      }
+
+      .veloxcore-reply-preview span {
+        overflow: hidden;
+        font-size: 11px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .veloxcore-reply-preview button {
+        display: grid;
+        width: 25px;
+        height: 25px;
+        flex: 0 0 25px;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #e9eeec;
+        color: #62676a;
+        font-size: 17px;
+        cursor: pointer;
+      }
+
+      .velox-message-toast {
+        position: absolute;
+        z-index: 24;
+        bottom: 112px;
+        left: 50%;
+        max-width: calc(100% - 36px);
+        padding: 8px 13px;
+        transform: translateX(-50%);
+        border-radius: 18px;
+        background: rgb(38 41 43 / 90%);
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        pointer-events: none;
       }
 
       .thread-composer--server {
@@ -4190,6 +4413,10 @@
         font: inherit;
         font-size: 14px;
         text-align: right;
+      }
+
+      .server-composer-input.veloxcore-readonly {
+        text-align: center;
       }
 
       .server-composer-input::placeholder {
@@ -5710,6 +5937,33 @@
                 <span class="messages-unread-dot" aria-label="رسالة غير مقروءة"></span>
               </span>
             </button>
+            <button
+              class="messages-row"
+              type="button"
+              id="veloxcore-group-conversation"
+              data-name="VeloXCore"
+              data-preview=""
+              data-time=""
+              data-unread="false"
+              data-chat-type="groups"
+              data-group="true"
+              data-favorite="false"
+              data-muted="false"
+              data-avatar="green"
+              aria-label="فتح مجموعة VeloXCore"
+            >
+              <span class="messages-avatar messages-avatar--green messages-avatar--veloxcore" aria-hidden="true">
+                <img class="veloxcore-avatar-image" alt="" />
+              </span>
+              <span class="messages-row-copy">
+                <span class="messages-row-name">VeloXCore</span>
+                <span class="messages-row-preview"></span>
+              </span>
+              <span class="messages-row-meta">
+                <time></time>
+                <span class="messages-unread-dot" aria-label="رسالة غير مقروءة"></span>
+              </span>
+            </button>
           </div>
           <div class="messages-empty" id="messages-empty" hidden>لا توجد رسائل مطابقة.</div>
           <div class="messages-folder-empty" id="messages-folder-empty" hidden>
@@ -6726,6 +6980,7 @@
                   <path d="M4 5.5h16v12H9l-5 3z" stroke-linejoin="round" />
                   <path d="M8 9.5h8M8 13h6" stroke-linecap="round" />
                 </svg>
+                <img class="veloxcore-avatar-image" alt="" hidden />
               </span>
               <h2 class="thread-contact" id="thread-contact">محادثة</h2>
               <span class="thread-server-shield" id="thread-server-shield" aria-label="مسؤول خادم موثّق" hidden>
@@ -6744,6 +6999,10 @@
             </button>
           </header>
           <div class="thread-log" id="thread-log" aria-live="polite"></div>
+          <div class="velox-selection-toolbar" id="veloxcore-selection-toolbar" hidden>
+            <span id="veloxcore-selection-count">تم تحديد 0 رسالة</span>
+            <button id="veloxcore-selection-cancel" type="button">إلغاء التحديد</button>
+          </div>
           <form class="thread-composer" id="thread-compose">
             <input id="thread-message-input" type="text" placeholder="اكتب رسالة" aria-label="اكتب رسالة" autocomplete="off" />
             <button type="submit" aria-label="إرسال الرسالة">
@@ -6753,6 +7012,10 @@
             </button>
           </form>
           <form class="thread-composer thread-composer--server" id="server-thread-compose" hidden>
+            <div class="veloxcore-reply-preview" id="veloxcore-reply-preview" hidden>
+              <span id="veloxcore-reply-text"></span>
+              <button id="veloxcore-reply-cancel" type="button" aria-label="إلغاء الرد">×</button>
+            </div>
             <div class="server-composer-shell">
               <textarea class="server-composer-input" id="server-thread-message-input" rows="1" placeholder="رسالة" aria-label="رسالة إلى مسؤول الخادم"></textarea>
               <div class="server-composer-tools" aria-label="أدوات الرسالة">
@@ -7088,6 +7351,21 @@
       const serverAdminConversation = document.getElementById(
         "server-admin-conversation",
       );
+      const veloxCoreConversation = document.getElementById(
+        "veloxcore-group-conversation",
+      );
+      const VELOXCORE_AVATAR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wgARCAB/AIADASIAAhEBAxEB/8QAHAAAAQUBAQEAAAAAAAAAAAAAAAIEBQYHAwEI/8QAGgEAAQUBAAAAAAAAAAAAAAAAAgABAwQFBv/aAAwDAQACEAMQAAABoI+ddMoclUOMaO2rTeACYA6BTkjaEh0eWL7SMaIzunYvfYuV0peZ6Lk32WGfQuWWbNCFo0bZ750cpTdKZdspltG1Ciedyy/Va40BYa45v1NBmYHkHI6XHOXOD1nz+0vdI6CZEzF6q1i3e8YvCirPsY+1bDrP+DeKglSS7asVoz69nys5a810fLuscT+gsuk0oLWa1NBD2qU1ygkb5zOVbRup898mIATKnoBydW/zldTHyemsHbXnumim/KK1Ey9bMdjqINspMGWeegAAJlXCK6U6crIMpgsCSmYC2ZmjE53sGY6u/wAKbNV+9cSBDngCQ5bPQjkoH1LN3vFA7KLTrLmt8r5dnp9uxOtvwbdSdggAQAEgdNWYAdwBLraKks4dOzPzmMwAyAEgLODf/8QAJRAAAgICAgMAAgIDAAAAAAAAAwQBAgAFERQSEyAGECEwFSIj/9oACAEBAAEFAv7wGIsUKxDZ0DxnTJnWvlgzGTHzEZAZnIWvOQmWc/x58vSaTqmpWOPZ+uaXqSubJOHVDUms/GvUs2wIVAjxhoStWtsSRH5mw7cSoXsKiZKmShKkpzn5Gj6WZj91jPxlH1B5x9vqLCqV0zFgVjceMNxmtZ9JWB5pWv8AXnNkp3Uy14nIzXJ2cZrWo6c5tmuyykCbTcizDLhfaXB24lMvYVi9lzDJBKRn5Ej6GZjKxn48l11/LNg11llxSS+xaqoGxpmZnn9RmtZ9JmB5pmP4jNmn3U704nWJ9tq1s5x8sssTxrFmC+dvgduJTL2Fq3sscdoJSM3yHob1K/VWmfHGT9YdCrzm1b9hJ+YzXs+kzA80jPNMfWo0CLeFYtjh/efz6y5Lcz9DnEy+9URZVYraLVJfyx2bVMdjwGAfnbZnixJ+qxziGtHYNR31zTA/51jEyAdfKdsv5q3t52m/VWJbmfrXqwWzr8mIk6NkXqvWvNUYHEcccwVKQN7Fj2En6AOSXZYqMUzgyeMobiKULTzzWF8wZ+QkoAd7c/dC+ukzz+6W4zXbH1Yp/wAzWtFK7Z+XmZ/srbjNbtJWnfballrW5+2liJn+otnl96PTzsy//8QAJxEAAgICAQIGAgMAAAAAAAAAAQIAAwQSERMhBRAUIDFBQlEiI3H/2gAIAQMBAT8Ba9RPUrEsDfHmqFvienaNSRPEmtxn69Z/2YeaMhefuE6naCAS5vxErqGvUsPAgzUb+usdpl0C2sqZiWNjXatAdhKW+jNtRzEXY8CZtoCenSU42h5hnjGNo3WWeG39Svj9QnU7S67nsJQbau/ESnQbP8nzyqRYhUzDc41+jSxwFmJQWPMVVRJY2x87WLnVZn4526n3MZS3ZvqYQG0ybPx83547SuvUS+ncTGDUvq0xR/Lb9R22PPueoNF7Dj2f/8QAJREAAQMDAwUAAwAAAAAAAAAAAQACAwQREhAhQQUTIjFRMnGR/9oACAECAQE/AbLFEahpKwRapoWSbuVTSmH9Lp0u5iOjRddQlyfgPQVPShzTI82aFTzsvgwIfCnR92Mxn2hdjrjhNcJGh4UsnZjL+eEyMvNhyqohrBTRqCl7ZvodvJdQixdmPRXTJdzEV1CXN+LeFB3IPO11BDgM3/kdW/CpIu7GY+UHFhyCpqcv8/qc0C0YTjc6yuc92DFFUFptJ7VT5PzHorpU4sWHhE7X+6vvbZRR4hPgZJs5VUVo8P4unQl8mXATjc6gg7jXZwxco2NiZgzV7wwZFf/EADcQAAIAAwQHBgUCBwAAAAAAAAECAAMhEBESMQQiMkFCUXETIDAzYYEjUmKRoRSSU3KCorHB4f/aAAgBAQAGPwLx1mymwupvBj4aM93IXx5Mz9pjy3+0bJ+0Zd/KNk/aPLf7R5Mz9pi4i4iAbyAaGMM/L5hGJGDDmLHlcWa9YIIu7qSV4j9oWWguVRcLMU1rvTeYeYuoo2RzMEnOz6koYxSzTevOFdTRheLO2Uas2vv3W0phV6L0saZxZL1gszYm3kmAhBmld2Qvh1VQoWlwsF+yaGxtGbdVbHl8Wa9e4kkb8zyEBEFyqLhZgU6kunvFM+fKFQG4odo8cM/M323HaSntCzVzUwrrkwvs7VRqTa+++06Q415uX8thI22osAAXkwdGlHWPmN/rugnZNDY2jndrLY8vjFV62LL4c26QEQdBGob7s4uGylBBc+cwp9PfuO0lPaFmrmpgOuTC8WY1GpN1vffGM7cz/EYeI5+kY12t0fqFX4v8P15xhDXgfk98E7OR6WNo7ZrVelmFuE4hHaH+gWU2VoIM3iNF8HCdqXT2hZo4T+IDA3g1i7dGtldSDdmaCAIwLspTwO10l+zVtVPUxc4pv9RZ2G9cukekY1zl19o6QZnE1F8AtMOGWlXMU1UWiryEDRtJNOCZ8v8AyOymbSfkQFzdtv0HKKRccoaTuBp0jCuylB3woFTA0eUdUZn5jaFnDFh2DyjFfivrfzjAdpKe1izAfitqjp4BuzPd7ObWUf7YV1N6tvEFmNwFSYaZw5KPTxsD60o/iEkSXDdoMTEcvAeRNADry8fG9JCHW9fSP//EACgQAQACAAUCBgMBAQAAAAAAAAEAESExQVFhgZEQIHGxwdGh4fDxMP/aAAgBAQABPyGVKlf8qlRTlUJc7svp2jmBkjmHXEs++heKOko8tsKwT0mQP1TJG65aYP6SduwCJSQX43R03mE9/wArIcYckvwp8YLNjlFYIaR08gTNcqXZq9oAMIuDwoptl7AgMZS3HSuJQVNq+EGVt9eNGA2luIy9sROIR9SJr+5U+NzPYC/W9X28BGVfDdVFgPjoX9tMhCX+kw0KirRgY/mOpbn7fKFmIGPb6kJMkw9t95RWEqMEwnb+4MqeAGweDPVh+dT8QNl3MuUFCJW1zvnac3fcw8IEkvHc6GazI9eI2NkEct6mFrTQ+ZUy9hVoHT+31EstvXct+kWIighpXIPZGjbEzeCqWV9jZQsuZx7TU/t/CRhfY33lGUqL60NjnMgDQMglMVdI+5xMZj1p1Y6NwA5fMVlb8h4AZteO50PxNcQVuakeWyJx4LOpgOND56wmPX9NB8xi29u2lclNqcLwsNh8UZWZ17jHb5XTLrYsGKlTE0ZZL/WHf3gyvOIdDTqQKstw+TpMe1tYiWv9sx0t3LfpLTzEYZ+6JonJcG+olMJUdyWG2DNmjiHENolpIQUlqrOvLqxW+a3RF2dx+X0JhzZKZLqSpViby/sX731OUOu7vMDv7n7i8eAmkX+15wC5WUXFNjlgmtCvltShAMzN7MFTaR+BIVFaJwi4hLGJcLRSbyg7mO+iFaYXrbsVvmtxJQS4A9n3/TaWMS65dVnl48kbBowoY/8A8h4AwAd7l0+Zc89Ey9LsbdY7vxVTD3dxyIgoHWgjkwoA7GhFpYfRQrf+jxjrVia8z6lJs1+k6y551JDTazzoRbF81tdGOL2fc//aAAwDAQACAAMAAAAQW7ODBL381dSDHCSb6F2ySGo7/k14ESv2/wAHKxEEUg5e9OcogleMwdwgACQANPQABf/EACMRAQACAQMDBQEAAAAAAAAAAAEAETEQIUFRcdFhgbHB8JH/2gAIAQMBAT8QVpYLzMk1xiCQm2EdlgcPc+8xsChk8SpGMP1HZcualiYD5j1Qf6zDvqhAZjviafU/bwqOGNXMSqcoxZGH99cxr7BZUYAxs9oVl3+HEoB2Y7ns617EXMaxcZi7ANPZ5+4wHmCV7eYKKxFVdFnQvmVgNmz6kBE4X48x6HJKimr2M4VXMGwzHuN5iHT/ACo6rXZ1yxE19VAtn//EACURAQABAwIFBQEAAAAAAAAAAAEAESExQXEQYYHB8FGRodHhsf/aAAgBAgEBPxAGKy+KccZFmYSI3hgHKuvLzaPDWqw9mUNRub6/H8iUZUUnn66+2PefI2Dt9wNrHXb5lKOBmmZjcx794jWlfyYCXyk6CN35mHbypdVfKrL+a2g0jqDs9p4Iuv3Cdbub6nfpKJisO756Ssu1WHn5rHW5cfrihHAxF8MbmPfvBaUSAiuwXgGdv1l841x0plmFg+T1gHOjNO8Ln7jbXznHEs+A4sUZwKWsJoy7DF160/J1jOfLrL5xBLg8RaNRnU8vr5ji9WxP/8QAJxABAAIBAwMEAwEBAQAAAAAAAQARITFBUWFxgSCRobEQwfDR4fH/2gAIAQEAAT8QCWlpaV68wHiW4loIe2zPCbiYRwix40gdcOaNQT3z/CX/AJQ/1NPfcP1FT35ERt+lnUuXZkz4Zk/U+Gp/1PlvX6jWuUyDZHRmZKGhF0cNPvGsINB2hyGp1PaA4O6A+ZiIG9bHI92j0YpAwFKGkYlP5uYH6Eo6OV7BYb1pBgKPMHaVmuiyvGo/UbAKhZmLON0MY3ihhIWquViE3AWoFmv+NjxKKNtl3MiaXW+pDQGJuiyWTS2biYDT5x5MuD8qUKl9YMg4OxXbqjlHUW4GyxwZXtCBtRjDjocDxEXkliKxbXZrEThBjFEoHdFVw8MFPXv4afEruHhNEiOo9l1b8S35eJmhPE7na6jwvyimENIlI8QUssZaGMcaefEfKQ9Bz6AoPYhdrVm/SU6X/qB2eY1UIsxBu3YDMt1osKu+kqVbmOIyza35H9xVFLMoQEv1/iPBAExicN10SzzLouHon3t+BQKzQwf2LTu8S0I5lQQAAEyTh8s9iGEGP59GMz4Le9QBSAZVYaRC3q83BvzAprcxW1f4vXBUNN+bw0+JXyk2TROZrX7Y6txdnPlMIR8F3eo8L8o4EI0iZI8xLV+s92A6sr0YMQIoOgB8S/bvrH+naGFDpOT5GjsTvTFCMeRnoEazZu11i3K/CqOGZSwZbr+i+hBaUS8LyFk6s3ERZHCy2qTFn2J/wlVWnMyP3fYmZA8v727+0E5FPrupwH2RscNK5u35VzGeCl+r/wCR2ls+pLbHuZa+2HxAQCZDRHRmtytzq3B2V9ozQ1eSAzer3B5hnWAmFOPGzrFU5VquVnGynRb+R+AjNNDLzM+DPeozFWLfpVMDpcAksBXqurxk9oLq5C3seQX4gFgx6IWPszOgzFrWwdXQ/wCQikXE6GnZiNUPYXV8H6jAG0IAOgppZ8jjsEvH1MIax6KmvnkHvPWFVJrr3A3NE7QGUTINE2YstpkurLXlfhJRA2bw73+OneI2RaDLoPgrwhLNl/owLMscwpnwPlIrNxbfRUsVFiYU5vxyNgOXpKUzFcPQdd13YDfAzFe4uNo50ug2PrNza+0ehULqXTrWXtUR0EBojowt7SNAlJLMltN3L9sdxle7iOlPsfgI6PqcwRyH+3giuiQU9rQcW6sVlbhURh99r2Ja4NQ5JgKOi2Bzd9YwXFMtVavGTxAqFcL92p95O4jLmXfpNYbuq113x13dMbscp/A1BVLDaFNdVfcOTyZ1Gn65ejD3qK+Shgi1exH2yN21ry6vV6S89dvoGogZh7LAcu/27u8z8mAC3hUWjkCnWMmZr6qogkWEsRNkp55D1Ck3mEyx9TgpI+XBGSzXYaZ0/9k=";
+      const VELOXCORE_SENDER_AVATAR_DATA_URL =
+        "data:image/jpeg;base64,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";
+      const VELOXCORE_AVATAR_DATA_URL_FIXED =
+        VELOXCORE_AVATAR_DATA_URL.replace("JCQkJCT/wg", "JCT/wg");
+      veloxCoreConversation.querySelector(
+        ".veloxcore-avatar-image",
+      ).src = VELOXCORE_AVATAR_DATA_URL_FIXED;
+      const threadVeloxCoreAvatar = document
+        .getElementById("thread-server-avatar")
+        .querySelector(".veloxcore-avatar-image");
+      threadVeloxCoreAvatar.src = VELOXCORE_AVATAR_DATA_URL_FIXED;
       const serverEmojiPicker = document.getElementById("server-emoji-picker");
       const serverEmojiGrid = document.getElementById("server-emoji-grid");
       const SERVER_ADMIN_FIXED_REPLY =
@@ -7142,11 +7420,60 @@
         "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
         "VeloXCore TRADING",
       ].join("\n");
+      const VELOXCORE_NEW_SIGNAL_MESSAGE = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `5B1wY4yC`",
+        "⏰ **Schließungszeit:** 2:25",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
+      const VELOXCORE_SECOND_SIGNAL_MESSAGE = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `L6kH3j9F`",
+        "⏰ **Schließungszeit:** 12:20",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
+      const VELOXCORE_THIRD_SIGNAL_MESSAGE = [
+        "🚀 Exklusive Handelssignale (Live)",
+        "📊 **Zielwert:** XAUUSD +",
+        "🔐 **Aktivierungscode:** `Y4cZ5b1W`",
+        "⏰ **Schließungszeit:** 8:30",
+        "💰 **Risikomanagement:** 7% des Kontostands zuweisen",
+        "💡 **Ausführung:**",
+        "Öffnen Sie jetzt die Handelsplattform (VeloXCore) und führen Sie den Auftrag basierend auf den obigen Daten aus.",
+        "VeloXCore TRADING",
+      ].join("\n");
       const SERVER_ADMIN_REPLY_DELAY_MS = 60_000;
-      let serverAdminReplyScheduled = false;
-      let serverAdminReplyShown = false;
-      let serverAdminReplyTime = "";
-      let serverAdminMessageHistory = [];
+      const qc001StyleConversationStates = new Map([
+        [
+          serverAdminConversation,
+          {
+            replyScheduled: false,
+            replyShown: false,
+            replyTime: "",
+            messageHistory: [],
+          },
+        ],
+        [
+          veloxCoreConversation,
+          {
+            replyScheduled: false,
+            replyShown: false,
+            replyTime: "",
+            messageHistory: [],
+          },
+        ],
+      ]);
+      function getQc001StyleConversationState(row) {
+        return qc001StyleConversationStates.get(row);
+      }
       const SERVER_CHAT_EMOJI_CATEGORIES = {
         faces: [
           "😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣",
@@ -7322,6 +7649,23 @@
       let serverEmojiSelectionEnd = 0;
       let threadReturnScreen = "inbox";
       let activeConversation = null;
+      let veloxMessageActionMenu = null;
+      let veloxActionBubble = null;
+      let veloxMessageSelectionMode = false;
+      const veloxSelectedMessages = new Set();
+      let veloxMessageToastTimer = 0;
+      const veloxCoreReplyPreview = document.getElementById(
+        "veloxcore-reply-preview",
+      );
+      const veloxCoreReplyText = document.getElementById(
+        "veloxcore-reply-text",
+      );
+      const veloxCoreSelectionToolbar = document.getElementById(
+        "veloxcore-selection-toolbar",
+      );
+      const veloxCoreSelectionCount = document.getElementById(
+        "veloxcore-selection-count",
+      );
       let activeMessageFilter = "all";
       let folderDraft = { name: "", include: [], exclude: [] };
       let folderEditorKey = null;
@@ -8927,6 +9271,257 @@
         updateMessagesList();
       }
 
+      function getVeloxCoreFavorites() {
+        try {
+          const stored = JSON.parse(
+            localStorage.getItem("bonchat-veloxcore-message-favorites") ||
+              "[]",
+          );
+          return new Set(Array.isArray(stored) ? stored : []);
+        } catch {
+          return new Set();
+        }
+      }
+
+      function closeVeloxMessageActionMenu() {
+        if (veloxMessageActionMenu) {
+          veloxMessageActionMenu.hidden = true;
+          veloxMessageActionMenu.style.visibility = "";
+        }
+        veloxActionBubble = null;
+      }
+
+      function showVeloxMessageToast(message) {
+        let toast = messagesThread.querySelector(".velox-message-toast");
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.className = "velox-message-toast";
+          toast.setAttribute("role", "status");
+          toast.setAttribute("aria-live", "polite");
+          messagesThread.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.hidden = false;
+        window.clearTimeout(veloxMessageToastTimer);
+        veloxMessageToastTimer = window.setTimeout(() => {
+          toast.hidden = true;
+        }, 1900);
+      }
+
+      function updateVeloxSelectionToolbar() {
+        veloxCoreSelectionToolbar.hidden = !veloxMessageSelectionMode;
+        veloxCoreSelectionCount.textContent =
+          "تم تحديد " + veloxSelectedMessages.size + " رسالة";
+      }
+
+      function clearVeloxMessageSelection() {
+        veloxSelectedMessages.forEach((bubble) => {
+          bubble.classList.remove("thread-bubble--action-selected");
+        });
+        veloxSelectedMessages.clear();
+        veloxMessageSelectionMode = false;
+        updateVeloxSelectionToolbar();
+      }
+
+      function toggleVeloxMessageSelection(bubble) {
+        if (!veloxMessageSelectionMode) veloxMessageSelectionMode = true;
+        if (veloxSelectedMessages.has(bubble)) {
+          veloxSelectedMessages.delete(bubble);
+          bubble.classList.remove("thread-bubble--action-selected");
+        } else {
+          veloxSelectedMessages.add(bubble);
+          bubble.classList.add("thread-bubble--action-selected");
+        }
+        updateVeloxSelectionToolbar();
+      }
+
+      function ensureVeloxMessageActionMenu() {
+        if (veloxMessageActionMenu) return veloxMessageActionMenu;
+        const menu = document.createElement("div");
+        menu.className = "thread-message-action-menu";
+        menu.setAttribute("role", "toolbar");
+        menu.setAttribute("aria-label", "إجراءات الرسالة");
+        menu.hidden = true;
+        menu.innerHTML = `
+          <button class="thread-message-action" type="button" data-thread-action="favorite" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M4 5.5h16v14H4z" stroke-linejoin="round" />
+              <path d="m12 8 1.25 2.55 2.8.4-2.02 1.97.48 2.78L12 14.4l-2.51 1.3.48-2.78-2.02-1.97 2.8-.4z" stroke-linejoin="round" />
+            </svg>
+            <span class="thread-message-action-label">أضف إلى المفضلة</span>
+          </button>
+          <button class="thread-message-action" type="button" data-thread-action="forward">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M14 5 21 12l-7 7v-4.2C8.8 14.8 5.5 16.1 3 19c.4-5.9 3.5-9 11-9z" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="thread-message-action-label">إعادة التوجيه</span>
+          </button>
+          <button class="thread-message-action" type="button" data-thread-action="copy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="8" y="7" width="12" height="14" rx="2" />
+              <path d="M16 7V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2" stroke-linecap="round" />
+            </svg>
+            <span class="thread-message-action-label">نسخ</span>
+          </button>
+          <button class="thread-message-action" type="button" data-thread-action="reply">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M10 8 5 12l5 4v-3c4.7-.2 7.5 1.3 9 4-.4-5.6-3.1-8.5-9-8.7z" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="thread-message-action-label">رد</span>
+          </button>
+          <button class="thread-message-action" type="button" data-thread-action="select">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M9 5h11M9 12h11M9 19h11" stroke-linecap="round" />
+              <path d="m3.5 5 1.3 1.3L7 4M3.5 12l1.3 1.3L7 11M3.5 19l1.3 1.3L7 18" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="thread-message-action-label">اختر</span>
+          </button>`;
+        menu.addEventListener("click", async (event) => {
+          const actionButton = event.target.closest("[data-thread-action]");
+          const bubble = veloxActionBubble;
+          if (!actionButton || !bubble) return;
+          event.preventDefault();
+          event.stopPropagation();
+          const action = actionButton.dataset.threadAction;
+          const messageText = bubble.dataset.messageText || "";
+          const favoriteKey =
+            bubble.dataset.favoriteKey ||
+            JSON.stringify([veloxCoreConversation.id, messageText]);
+          closeVeloxMessageActionMenu();
+
+          if (action === "favorite") {
+            const favorites = getVeloxCoreFavorites();
+            const isFavorite = favorites.has(favoriteKey);
+            if (isFavorite) favorites.delete(favoriteKey);
+            else favorites.add(favoriteKey);
+            try {
+              localStorage.setItem(
+                "bonchat-veloxcore-message-favorites",
+                JSON.stringify(Array.from(favorites)),
+              );
+            } catch {}
+            bubble.classList.toggle("thread-bubble--favorite", !isFavorite);
+            showVeloxMessageToast(
+              isFavorite ? "أزيلت الرسالة من المفضلة" : "أضيفت إلى المفضلة",
+            );
+          } else if (action === "copy") {
+            const copied = await copyVeloxMessageText(messageText);
+            showVeloxMessageToast(
+              copied ? "تم نسخ الرسالة" : "تعذر نسخ الرسالة",
+            );
+          } else if (action === "forward") {
+            await forwardVeloxMessageText(messageText);
+          } else if (action === "reply") {
+            veloxCoreReplyText.textContent =
+              "رد على: " +
+              (messageText.length > 95
+                ? messageText.slice(0, 92) + "…"
+                : messageText);
+            veloxCoreReplyPreview.hidden = false;
+            showVeloxMessageToast("تم اختيار الرسالة للرد — الإرسال محظور");
+          } else if (action === "select") {
+            toggleVeloxMessageSelection(bubble);
+          }
+        });
+        messagesThread.appendChild(menu);
+        veloxMessageActionMenu = menu;
+        return menu;
+      }
+
+      function openVeloxMessageActionMenu(bubble) {
+        const menu = ensureVeloxMessageActionMenu();
+        closeVeloxMessageActionMenu();
+        veloxActionBubble = bubble;
+        const favoriteButton = menu.querySelector(
+          '[data-thread-action="favorite"]',
+        );
+        const favoriteKey =
+          bubble.dataset.favoriteKey ||
+          JSON.stringify([
+            veloxCoreConversation.id,
+            bubble.dataset.messageText || "",
+          ]);
+        const isFavorite = getVeloxCoreFavorites().has(favoriteKey);
+        favoriteButton.setAttribute("aria-pressed", String(isFavorite));
+        favoriteButton.querySelector(".thread-message-action-label").textContent =
+          isFavorite ? "إزالة من المفضلة" : "أضف إلى المفضلة";
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        const threadRect = messagesThread.getBoundingClientRect();
+        const bubbleRect = bubble.getBoundingClientRect();
+        const menuWidth = menu.offsetWidth;
+        const menuHeight = menu.offsetHeight;
+        const composerHeight = serverThreadCompose.offsetHeight || 108;
+        const maxLeft = Math.max(12, threadRect.width - menuWidth - 12);
+        const left = Math.min(
+          maxLeft,
+          Math.max(
+            12,
+            bubbleRect.left +
+              bubbleRect.width / 2 -
+              threadRect.left -
+              menuWidth / 2,
+          ),
+        );
+        const maxTop = Math.max(
+          66,
+          threadRect.height - composerHeight - menuHeight - 7,
+        );
+        const belowBubble = bubbleRect.bottom - threadRect.top + 9;
+        const aboveBubble =
+          bubbleRect.top - threadRect.top - menuHeight - 9;
+        const top =
+          belowBubble <= maxTop
+            ? belowBubble
+            : Math.max(66, Math.min(maxTop, aboveBubble));
+        menu.style.left = `${left}px`;
+        menu.style.top = `${top}px`;
+        menu.style.visibility = "visible";
+      }
+
+      async function copyVeloxMessageText(text) {
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            return true;
+          }
+        } catch {}
+        const temporaryInput = document.createElement("textarea");
+        temporaryInput.value = text;
+        temporaryInput.setAttribute("readonly", "");
+        temporaryInput.style.position = "fixed";
+        temporaryInput.style.opacity = "0";
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        let copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch {}
+        temporaryInput.remove();
+        return copied;
+      }
+
+      async function forwardVeloxMessageText(text) {
+        if (typeof navigator.share === "function") {
+          try {
+            await navigator.share({
+              title: "رسالة من VeloXCore",
+              text,
+            });
+            showVeloxMessageToast("تم فتح خيارات مشاركة الرسالة");
+            return;
+          } catch (error) {
+            if (error?.name === "AbortError") return;
+          }
+        }
+        const copied = await copyVeloxMessageText(text);
+        showVeloxMessageToast(
+          copied
+            ? "نُسخت الرسالة لتتمكن من إعادة توجيهها"
+            : "تعذرت مشاركة الرسالة",
+        );
+      }
+
       function addThreadBubble(text, sent, timeLabel = "", extraClass = "") {
         const bubble = document.createElement("div");
         bubble.className = sent
@@ -8935,6 +9530,18 @@
         if (extraClass) bubble.classList.add(extraClass);
         bubble.textContent = text;
         if (messagesThread.classList.contains("messages-thread--server")) {
+          bubble.dataset.messageText = text;
+          if (activeConversation === veloxCoreConversation) {
+            const favoriteKey = JSON.stringify([
+              veloxCoreConversation.id,
+              text,
+            ]);
+            bubble.dataset.favoriteKey = favoriteKey;
+            bubble.classList.toggle(
+              "thread-bubble--favorite",
+              getVeloxCoreFavorites().has(favoriteKey),
+            );
+          }
           const time = document.createElement("time");
           time.className = "thread-bubble-time";
           time.textContent =
@@ -8946,39 +9553,75 @@
             });
           bubble.appendChild(time);
         }
-        threadLog.appendChild(bubble);
+        if (activeConversation === veloxCoreConversation) {
+          const senderRow = document.createElement("div");
+          senderRow.className = "velox-sender-row";
+          const senderAvatar = document.createElement("img");
+          senderAvatar.className = "velox-sender-avatar";
+          senderAvatar.src = VELOXCORE_SENDER_AVATAR_DATA_URL;
+          senderAvatar.alt = "صورة Arthur Smith";
+          senderAvatar.width = 40;
+          senderAvatar.height = 40;
+          const senderContent = document.createElement("div");
+          senderContent.className = "velox-sender-content";
+          const senderName = document.createElement("span");
+          senderName.className = "velox-sender-name";
+          senderName.textContent = "Arthur Smith";
+          senderContent.append(senderName, bubble);
+          senderRow.append(senderAvatar, senderContent);
+          threadLog.appendChild(senderRow);
+        } else {
+          threadLog.appendChild(bubble);
+        }
         threadLog.scrollTop = threadLog.scrollHeight;
       }
 
       function openConversation(row, returnTo = "inbox") {
+        closeVeloxMessageActionMenu();
+        clearVeloxMessageSelection();
+        veloxCoreReplyPreview.hidden = true;
+        veloxCoreReplyText.textContent = "";
         threadReturnScreen = returnTo;
         activeConversation = row;
         threadContact.textContent = row.dataset.name || "محادثة جديدة";
         const isServerAdmin = row.dataset.serverAdmin === "true";
+        const isQc001Style =
+          isServerAdmin || row === veloxCoreConversation;
+        const isVeloxCore = row === veloxCoreConversation;
         messagesThread.classList.toggle(
           "messages-thread--server",
-          isServerAdmin,
+          isQc001Style,
         );
         document.getElementById("thread-server-avatar").hidden =
-          !isServerAdmin;
+          !isQc001Style || isVeloxCore;
         document.getElementById("thread-server-shield").hidden =
-          !isServerAdmin;
-        document.getElementById("thread-compose").hidden = isServerAdmin;
-        serverThreadCompose.hidden = !isServerAdmin;
+          !isQc001Style;
+        const threadServerAvatar =
+          document.getElementById("thread-server-avatar");
+        threadServerAvatar.classList.toggle(
+          "thread-server-avatar--veloxcore",
+          isVeloxCore,
+        );
+        threadServerAvatar.querySelector("svg").hidden = isVeloxCore;
+        threadVeloxCoreAvatar.hidden = !isVeloxCore;
+        document.getElementById("thread-compose").hidden = isQc001Style;
+        serverThreadCompose.hidden = !isQc001Style;
         closeServerEmojiPicker();
         threadLog.replaceChildren();
         const dayLabel = document.createElement("p");
         dayLabel.className = "thread-day";
-        dayLabel.textContent = isServerAdmin
+        dayLabel.textContent = isQc001Style
           ? "29 أكتوبر"
           : row.dataset.preview
             ? "اليوم"
             : "ابدأ محادثة جديدة";
         threadLog.appendChild(dayLabel);
-        if (isServerAdmin) {
+        if (isQc001Style) {
           if (
-            row.id === "server-admin-conversation" &&
-            row.dataset.name === "خادم: qc001"
+            (row === serverAdminConversation &&
+              row.dataset.name === "خادم: qc001") ||
+            (row === veloxCoreConversation &&
+              row.dataset.name === "VeloXCore")
           ) {
             addThreadBubble(
               QC001_SIGNAL_MESSAGE,
@@ -9041,14 +9684,54 @@
               "thread-bubble--qc001-signal",
             );
           }
-          serverAdminMessageHistory.forEach((message) => {
+          if (row === veloxCoreConversation) {
+            addThreadBubble(
+              VELOXCORE_NEW_SIGNAL_MESSAGE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "5B1wY4yC",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              VELOXCORE_SECOND_SIGNAL_MESSAGE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "L6kH3j9F",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              VELOXCORE_THIRD_SIGNAL_MESSAGE,
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+            addThreadBubble(
+              "Y4cZ5b1W",
+              false,
+              "",
+              "thread-bubble--qc001-signal",
+            );
+          }
+          const conversationState =
+            getQc001StyleConversationState(row);
+          conversationState.messageHistory.forEach((message) => {
             addThreadBubble(message.text, true, message.time);
           });
-          if (serverAdminReplyShown) {
+          if (conversationState.replyShown) {
             addThreadBubble(
               SERVER_ADMIN_FIXED_REPLY,
               false,
-              serverAdminReplyTime,
+              conversationState.replyTime,
             );
           }
         } else if (row.dataset.preview) {
@@ -9063,7 +9746,17 @@
         messagesThread.hidden = false;
         threadMessageInput.value = "";
         serverThreadMessageInput.value = "";
-        if (!isServerAdmin) {
+        serverThreadMessageInput.placeholder = isVeloxCore
+          ? "يحظر على المجموعة إرسال الرسائل"
+          : "رسالة";
+        serverThreadMessageInput.readOnly = isVeloxCore;
+        serverThreadMessageInput.classList.toggle(
+          "veloxcore-readonly",
+          isVeloxCore,
+        );
+        serverThreadCompose.querySelector('button[type="submit"]').disabled =
+          isVeloxCore;
+        if (!isQc001Style) {
           threadMessageInput.focus({ preventScroll: true });
         }
       }
@@ -9073,36 +9766,44 @@
         openConversation(serverAdminConversation, "profile");
       }
 
-      function scheduleServerAdminReply() {
-        if (serverAdminReplyScheduled || serverAdminReplyShown) return;
-        serverAdminReplyScheduled = true;
+      function scheduleServerAdminReply(row) {
+        const conversationState =
+          getQc001StyleConversationState(row);
+        if (
+          !conversationState ||
+          conversationState.replyScheduled ||
+          conversationState.replyShown
+        ) {
+          return;
+        }
+        conversationState.replyScheduled = true;
         window.setTimeout(() => {
-          serverAdminReplyScheduled = false;
-          serverAdminReplyShown = true;
-          serverAdminReplyTime = new Date().toLocaleTimeString("en-GB", {
+          conversationState.replyScheduled = false;
+          conversationState.replyShown = true;
+          conversationState.replyTime = new Date().toLocaleTimeString("en-GB", {
             hour: "2-digit",
             minute: "2-digit",
             hour12: false,
           });
-          serverAdminConversation.dataset.preview = SERVER_ADMIN_FIXED_REPLY;
-          serverAdminConversation.dataset.time = serverAdminReplyTime;
+          row.dataset.preview = SERVER_ADMIN_FIXED_REPLY;
+          row.dataset.time = conversationState.replyTime;
           const isViewingConversation =
-            activeConversation === serverAdminConversation &&
+            activeConversation === row &&
             !messagesThread.hidden;
-          serverAdminConversation.dataset.unread = String(
+          row.dataset.unread = String(
             !isViewingConversation,
           );
-          serverAdminConversation.querySelector(
+          row.querySelector(
             ".messages-row-preview",
           ).textContent = SERVER_ADMIN_FIXED_REPLY;
-          serverAdminConversation.querySelector(
+          row.querySelector(
             ".messages-row-meta time",
-          ).textContent = serverAdminReplyTime;
+          ).textContent = conversationState.replyTime;
           if (isViewingConversation) {
             addThreadBubble(
               SERVER_ADMIN_FIXED_REPLY,
               false,
-              serverAdminReplyTime,
+              conversationState.replyTime,
             );
           }
           updateMessagesList();
@@ -9112,19 +9813,22 @@
       function sendServerAdminMessage(event) {
         event.preventDefault();
         const text = serverThreadMessageInput.value.trim();
-        if (!text || activeConversation !== serverAdminConversation) return;
+        const row = activeConversation;
+        const conversationState =
+          getQc001StyleConversationState(row);
+        if (!text || !conversationState || row === veloxCoreConversation) return;
         const time = new Date().toLocaleTimeString("en-GB", {
           hour: "2-digit",
           minute: "2-digit",
           hour12: false,
         });
-        serverAdminMessageHistory.push({ text, time });
+        conversationState.messageHistory.push({ text, time });
         addThreadBubble(text, true, time);
-        activeConversation.dataset.unread = "false";
+        row.dataset.unread = "false";
         serverThreadMessageInput.value = "";
         document.getElementById("server-attachment-note").hidden = true;
         closeServerEmojiPicker();
-        scheduleServerAdminReply();
+        scheduleServerAdminReply(row);
         updateMessagesList();
       }
 
@@ -10588,6 +11292,13 @@
       });
       document.addEventListener("click", (event) => {
         if (
+          veloxMessageActionMenu &&
+          !veloxMessageActionMenu.hidden &&
+          !event.target.closest(".thread-message-action-menu, .thread-bubble")
+        ) {
+          closeVeloxMessageActionMenu();
+        }
+        if (
           !serverEmojiPicker.hidden &&
           !event.target.closest("#server-emoji-picker, #server-chat-emoji")
         ) {
@@ -10608,11 +11319,46 @@
           messagesMoreMenu.hidden = true;
         }
       });
+      threadLog.addEventListener("click", (event) => {
+        if (activeConversation !== veloxCoreConversation) return;
+        const bubble = event.target.closest(".thread-bubble");
+        if (!bubble || !threadLog.contains(bubble)) return;
+        event.stopPropagation();
+        if (veloxMessageSelectionMode) {
+          closeVeloxMessageActionMenu();
+          toggleVeloxMessageSelection(bubble);
+        } else {
+          openVeloxMessageActionMenu(bubble);
+        }
+      });
+      threadLog.addEventListener("contextmenu", (event) => {
+        if (activeConversation !== veloxCoreConversation) return;
+        const bubble = event.target.closest(".thread-bubble");
+        if (!bubble || !threadLog.contains(bubble)) return;
+        event.preventDefault();
+        if (veloxMessageSelectionMode) {
+          toggleVeloxMessageSelection(bubble);
+        } else {
+          openVeloxMessageActionMenu(bubble);
+        }
+      });
+      document
+        .getElementById("veloxcore-selection-cancel")
+        .addEventListener("click", clearVeloxMessageSelection);
+      document
+        .getElementById("veloxcore-reply-cancel")
+        .addEventListener("click", () => {
+          veloxCoreReplyPreview.hidden = true;
+          veloxCoreReplyText.textContent = "";
+        });
       messagesList.addEventListener("click", (event) => {
         const row = event.target.closest(".messages-row");
         if (row) openConversation(row);
       });
       document.getElementById("thread-back").addEventListener("click", () => {
+        closeVeloxMessageActionMenu();
+        clearVeloxMessageSelection();
+        veloxCoreReplyPreview.hidden = true;
         messagesThread.hidden = true;
         if (threadReturnScreen === "profile") {
           messagesInbox.hidden = true;
